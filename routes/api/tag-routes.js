@@ -8,11 +8,12 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try{
     const tagData = await Tag.findAll({
-      include: [{ model: Product }, { model: ProductTag } ],
+      include: [{ model: Product }],
     });
     res.status(200).json(tagData);
   } catch (err){
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
@@ -21,7 +22,7 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
   try{
     const tagData = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product }, { model: ProductTag }],
+      include: [{ model: Product, through: ProductTag }],
     });
     if(!tagData){
       res.status(404).json({message: 'Tag not found.'});
@@ -30,6 +31,7 @@ router.get('/:id', async (req, res) => {
     res.status(200).json(tagData);
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
@@ -37,12 +39,10 @@ router.post('/', async (req, res) => {
   // create a new tag
   try{
     const tagData = await Tag.create({
-      id: req.body.id,
       tag_name: req.body.tag_name,
     });
     res.status(200).json(tagData);
   } catch(err){
-    // SHOULD THIS BE A 400 OR A 500 ERROR?
     res.status(500).json(err);
   }
 });
@@ -55,8 +55,8 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    // SHOULD THIS BE INDEX O?
-    if(!tagData[0]){
+
+    if(!tagData){
       res.status(404).json({ message: 'Could not update. ID not found!' });
       return;
     }
