@@ -57,7 +57,7 @@ router.put('/:id', async (req, res) => {
     });
     // SHOULD THIS BE INDEX O?
     if(!tagData[0]){
-      res.status(404).json({ message: 'Could not updat, no tag with that id was found!' });
+      res.status(404).json({ message: 'Could not update. ID not found!' });
       return;
     }
     res.status(200).json(tagData);
@@ -72,8 +72,8 @@ router.delete('/:id', async (req, res) => {
     const tagData = await Tag.destroy ({
       where: {
         id: req.params.id,
-      }
-    })
+      },
+    });
     res.status(200).json(tagData);
   } catch (err) {
     res.status(500).json(err);
