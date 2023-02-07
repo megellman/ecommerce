@@ -20,7 +20,7 @@ This project is the back end for an ecommerce site where a user can view, edit, 
 
 I created this project using Node.js, Express.js, Sequelize and MySQL. A user is able to run get requests to get all or one specific tag, product, or category. They are also able to run post, put, and delete requests to create, update, and delete tags, products and categories. 
 
-[Project Demo](https://watch.screencastify.com/v/xdHpaGrwuMyg15QMJ1bP)
+[Walkthrough Video](https://watch.screencastify.com/v/xdHpaGrwuMyg15QMJ1bP)
 
 ## Table of Contents
 * [Code Example](#code-example)
